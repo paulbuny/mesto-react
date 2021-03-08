@@ -12,12 +12,6 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     //Стейт переменная Поп-апа добавления нового места
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-    //Стейт переменная заголовка Поп-апа
-    const [popupTitle, setPopupTitle] = useState('');
-    //Стейт переменная названия Поп-апа
-    const [popupName, setPopupName] = useState('');
-    //Стейт переменная внутреннего содержания поп-апа
-    const [popupChildren, setPopupChildren] = useState([]);
     //Стейт переменная карточки по клику
     const [selectedCard, setSelectedCard] = useState({
         isOpen: false,
@@ -28,55 +22,16 @@ function App() {
     //Функция обработчика клика по кнопке редактирования аватара
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
-
-        setPopupTitle('Обновить аватар');
-        setPopupName('edit-avatar');
-        setPopupChildren((
-            <>
-                <input className="popup__input popup__input_profile_avatar" type="url" name="avatar" id="profile-avatar"
-                       minLength="2" required/>
-                <span className="popup__input-error profile-avatar-error"/>
-                <button className="button popup__submit" type="submit">Сохранить</button>
-            </>
-        ));
     }
 
     //Функция обработчика клика по кнопке редактирования профиля
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true);
-
-        setPopupTitle('Редактировать профиль');
-        setPopupName('edit-profile');
-        setPopupChildren((
-            <>
-                <input className="popup__input popup__input_profile_name" type="text" name="name" id="profile-name"
-                       minLength="2" maxLength="40" required />
-                <span className="popup__input-error profile-name-error"/>
-                <input className="popup__input popup__input_profile_job" type="text" name="about" id="profile-text"
-                       minLength="2" maxLength="200" required />
-                <span className="popup__input-error profile-text-error"/>
-                <button className="button popup__submit" type="submit">Сохранить</button>
-            </>
-        ));
     }
 
     //Функция обработчика клика по кнопке добавления нового места
     function handleAddPlaceClick() {
         setIsAddPlacePopupOpen(true);
-
-        setPopupTitle('Новое место');
-        setPopupName('add-place');
-        setPopupChildren((
-            <>
-                <input className="popup__input popup__input_card_place" type="text" name="name" id="card-title"
-                       placeholder="Название" minLength="2" maxLength="30" required/>
-                <span className="popup__input-error card-title-error"/>
-                <input className="popup__input popup__input_card_image" type="url" name="link" id="card-image"
-                       placeholder="Ссылка на картинку" required/>
-                <span className="popup__input-error card-image-error"/>
-                <button className="button popup__submit" type="submit">Создать</button>
-            </>
-        ));
     }
 
     //Функция обработчика клика по изображению в карточке
@@ -108,24 +63,41 @@ function App() {
               onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithForm title={popupTitle}
-                       name={popupName}
-                       children={popupChildren}
+        <PopupWithForm title={'Обновить аватар'}
+                       name={'edit-avatar'}
                        isOpen={isEditAvatarPopupOpen}
-                       onClose={closeAllPopups}
-        />
-        <PopupWithForm title={popupTitle}
-                        name={popupName}
-                        children={popupChildren}
+                       onClose={closeAllPopups}>
+            <input className="popup__input popup__input_profile_avatar" type="url" name="avatar" id="profile-avatar" minLength="2" required/>
+            <span className="popup__input-error profile-avatar-error"/>
+            <button className="button popup__submit" type="submit">Сохранить</button>
+        </PopupWithForm>
+
+        <PopupWithForm title={'Редактировать профиль'}
+                        name={'edit-profile'}
                         isOpen={isEditProfilePopupOpen}
-                        onClose={closeAllPopups}
-         />
-        <PopupWithForm title={popupTitle}
-                     name={popupName}
-                     children={popupChildren}
+                        onClose={closeAllPopups}>
+            <input className="popup__input popup__input_profile_name" type="text" name="name" id="profile-name"
+                   minLength="2" maxLength="40" required />
+            <span className="popup__input-error profile-name-error"/>
+            <input className="popup__input popup__input_profile_job" type="text" name="about" id="profile-text"
+                   minLength="2" maxLength="200" required />
+            <span className="popup__input-error profile-text-error"/>
+            <button className="button popup__submit" type="submit">Сохранить</button>
+        </PopupWithForm>
+
+        <PopupWithForm title={'Новое место'}
+                     name={'add-place'}
                      isOpen={isAddPlacePopupOpen}
-                     onClose={closeAllPopups}
-        />
+                     onClose={closeAllPopups}>
+            <input className="popup__input popup__input_card_place" type="text" name="name" id="card-title"
+                   placeholder="Название" minLength="2" maxLength="30" required/>
+            <span className="popup__input-error card-title-error"/>
+            <input className="popup__input popup__input_card_image" type="url" name="link" id="card-image"
+                   placeholder="Ссылка на картинку" required/>
+            <span className="popup__input-error card-image-error"/>
+            <button className="button popup__submit" type="submit">Создать</button>
+        </PopupWithForm>
+
         <ImagePopup isOpen={selectedCard.isOpen} name={selectedCard.name} link={selectedCard.link} onClose={closeAllPopups}/>
         </div>
   );

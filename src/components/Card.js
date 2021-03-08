@@ -7,7 +7,7 @@ function Card(props) {
 
     return(
         <div className="card-template">
-            <li className="card" key={props.id}>
+            <li className="card">
                 <button className="button card__delete" type="button"/>
                 <img className="card__image" src={props.link} alt={props.name} onClick={handleClick}/>
                 <div className="card__text">

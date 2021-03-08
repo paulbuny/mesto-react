@@ -21,13 +21,15 @@ function Main(props) {
                 setUserDescription(data.about);
                 setUserName(data.name);
             })
+            .catch(console.error);
     }, []);
 
     //Получение массива карточек от сервера
     useEffect(()=> {
 
         api.getInitialCards()
-            .then((data) => setCards(data));
+            .then((data) => setCards(data))
+            .catch(console.error);
             }, []);
 
     return (
