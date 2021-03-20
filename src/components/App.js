@@ -1,9 +1,11 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import api from "../utils/api";
 
 function App() {
     //Стейт переменная Поп-апа Аватара
@@ -18,6 +20,16 @@ function App() {
         name: '',
         link: '',
     });
+
+    const [currentUser, setCurrentUser ] = useState({});
+
+    useEffect(() => {
+        api.getUserInformation()
+            .then((data) => {
+                setCurrentUser(data);
+            })
+            .catch(console.error);
+    }, [])
 
     //Функция обработчика клика по кнопке редактирования аватара
     function handleEditAvatarClick() {
@@ -55,6 +67,7 @@ function App() {
 
     return (
 
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
         <Main onEditProfile={handleEditProfileClick}
@@ -100,6 +113,7 @@ function App() {
 
         <ImagePopup isOpen={selectedCard.isOpen} name={selectedCard.name} link={selectedCard.link} onClose={closeAllPopups}/>
         </div>
+    </CurrentUserContext.Provider>
   );
 
 }
