@@ -29,20 +29,20 @@ function App() {
         avatar: '',
     });
 
+    const [cards, setCards] = useState([]);
+
     useEffect(() => {
         api.getUserInformation()
             .then((data) => {
                 setCurrentUser(data);
             })
-            .catch(console.error);
+            .catch(console.error)
     }, [])
-
-
-    const [cards, setCards] = useState([]);
 
     useEffect(() => {
         api.getInitialCards()
-            .then((cards) => setCards(cards));
+            .then((cards) => setCards(cards))
+            .catch(console.error)
     }, []);
 
     function handleCardLike(card) {
@@ -52,7 +52,7 @@ function App() {
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
             })
-            .catch(console.error);
+            .catch(console.error)
     }
 
     function handleDeleteCard(card) {
@@ -60,7 +60,7 @@ function App() {
             .then(() => {
                 setCards((state) => state.filter((res) => res !== card))
             })
-            .catch(console.error);
+            .catch(console.error)
     }
 
 

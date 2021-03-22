@@ -26,18 +26,20 @@ function Main(props) {
             <section>
                 <ul className="cards">
                     {
-                        props.cards.map(item => <Card
-                            key={item._id}
-                            name={item.name}
-                            link={item.link}
-                            likes={item.likes}
-                            id={item._id}
-                            onCardClick={props.onCardClick}
-                            card={item}
-                            onCardLike={props.onCardLike}
-                            onCardDelete={props.onCardDelete}
-                        />)
-                    }
+                        props.cards.map((item) => (
+                            <Card
+                                key={item._id}
+                                name={item.name}
+                                link={item.link}
+                                likes={item.likes}
+                                id={item._id}
+                                onCardClick={props.onCardClick}
+                                card={item}
+                                onCardLike={props.onCardLike}
+                                onCardDelete={props.onCardDelete}
+                            />
+                        )
+                        )}
                 </ul>
             </section>
         </main>
